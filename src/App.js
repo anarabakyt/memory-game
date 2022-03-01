@@ -9,6 +9,7 @@ const KEY='-uUrwXu0sdpIuzY-TZCp-uuZ22r6uH8eQgUAZGOnH7g'
 function App() {
 
   const [photos, setPhotos]=useState([])
+  const [selected, setSelected]=useState(null)
 
  const fetchingFromServer=async()=>{
    try{
@@ -51,6 +52,31 @@ console.log(index)
 let newPhotos=[...photos]
 newPhotos[index].mark=true;
 setPhotos(newPhotos)
+if(selected===null){
+  setSelected(index)
+  return
+}else{
+  if(newPhotos[index].unique===newPhotos[selected].unique){
+    console.log('the same phot clicked')
+      return
+  }else{
+    if(newPhotos[index].id!==newPhotos[selected].id){
+      console.log('they are different')
+     setTimeout(()=>{
+      newPhotos[index].mark=false;
+      newPhotos[selected].mark=false
+      setPhotos(newPhotos)
+      setSelected(null)
+     }, 500)
+    }else{
+      console.log('they are have the same id')
+      setSelected(null)
+    }
+
+  }
+
+  //newPhotos[index]
+}
  }
 useEffect(()=>{
   fetchingFromServer()
