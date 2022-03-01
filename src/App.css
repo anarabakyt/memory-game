@@ -2,15 +2,19 @@
   text-align: center;
   display: flex;
   width: 800px;
+ margin: auto;
   flex-wrap: wrap;
+
  
 }
 .card{
-  width: 120px;
-  height: 120px;
-  background-color:blue;
-  border:1px solid black;
+  
+  width: 130px;
+  height: 130px;
+  background: linear-gradient(to right, #3f0041, #9f3f2f);
+  border:2px solid white;
   box-sizing:border-box;
+  
 }
 .card:hover{
   border:solid 1px white;
@@ -20,6 +24,7 @@
 img{
   width: 100%;
   height: 100%;
+  
 }
 
 .notShow{
@@ -27,6 +32,24 @@ img{
 }
 .show{
   display:block;
+}
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+ 
+}
+button{
+  width: 770px;
+  height: 50px;
+  text-align: center;
+  background-color: rgb(243, 191, 21);
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: 2px rgb(192, 191, 191) solid;
+  font-weight: 300;
+  cursor: pointer;
 }
 .App-logo {
   height: 40vmin;

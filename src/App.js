@@ -10,6 +10,7 @@ function App() {
 
   const [photos, setPhotos]=useState([])
   const [selected, setSelected]=useState(null)
+  const [reset, setReset]=useState(false)
 
  const fetchingFromServer=async()=>{
    try{
@@ -19,23 +20,29 @@ function App() {
     const [page1, page2]=await axios.all([
       axios.get(URL+KEY+'&page=13'), 
       axios.get(URL+KEY+'&page=14')])
+      //console.log(page1)
     let data=[
       ...page1.data,
       ...page1.data,
       ...page2.data.slice(0,2),
       ...page2.data.slice(0,2)];
-      
+      //console.log(...page2.data.slice(0,2))
+      //console.log(data)
        data=data.map((image)=>{
+         //console.log({unique:nanoid()})
         return({...image,unique:nanoid()})
+        
       }) 
+     // console.log(data)
       const shuffle=(array)=>{
-
      
       for(let i=0; i<array.length; i++){
-         let temp=Math.floor(Math.random()*array.length)
-          let curr=array[temp];
-          array[temp]=array[i]
-          array[i]=curr;
+         let temp=Math.floor(Math.random()*array.length)//14
+         //console.log(temp)
+          let curr=array[temp];//curr=14;
+         // console.log(curr)
+          array[temp]=array[i]//14=0
+          array[i]=curr;//0=14
       }
      
      return array
@@ -48,7 +55,7 @@ function App() {
 
  }
  const handleClick=(index)=>{
-console.log(index)
+//console.log(index)
 let newPhotos=[...photos]
 newPhotos[index].mark=true;
 setPhotos(newPhotos)
@@ -78,12 +85,18 @@ if(selected===null){
   //newPhotos[index]
 }
  }
+ 
 useEffect(()=>{
   fetchingFromServer()
-}, [])
+}, [reset])
 
   return (
+    <div>
+       <div className='wrapper'>
+          <button type='reset' onClick={()=>setReset(!reset)}>New Game</button>
+       </div>
     <div className="App">
+       
       {photos.map((photo, index)=>{
         return(
           <div className='card' key={photo.unique} onClick={()=>handleClick(index)}>
@@ -91,6 +104,8 @@ useEffect(()=>{
           </div>
         )
       })}
+  
+    </div>
     </div>
   );
 }
